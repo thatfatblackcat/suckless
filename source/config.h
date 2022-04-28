@@ -32,6 +32,13 @@ static const char *dmenucmd[] = {
 	"-sf", dmenu_sf, NULL
 };
 
+static const char *nsxivcmd[] = {
+	"sxiv", "-ro",
+	"artworks",
+	"tatenaga",
+	"yokonaga", NULL
+};
+
 static const char *tags[] = {
 	"1", "2", "3",
 	"4", "5", "6",
@@ -94,6 +101,9 @@ static Key keys[] = {
 
 	{ MODKEY, XK_p, spawn, {.v = dmenucmd } },
 	{ MODKEY|ShiftMask, XK_p, spawn, {.v = spawncmd } },
+
+	{ MODKEY, XK_s, spawn, {.v = nsxivcmd } },
+	{ MODKEY|ShiftMask, XK_s, spawn, {.v = nsxivcmd } },
 
 	{ MODKEY, XK_0, view, {.ui = ~0 } },
 	{ MODKEY|ShiftMask, XK_0, tag, {.ui = ~0 } },
