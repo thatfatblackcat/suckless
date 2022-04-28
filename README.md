@@ -5,11 +5,10 @@
 If you're using `musl` instead of `glibc` you're also going to need `musl-devel` for stdio.h and stuff.
 Also don't forget to link `tcc` to `cc` in your `bin` directory, or edit `config.mk` appropriately.
 
-Here's the command ready for Void and Alpine Linux users.
+Here's the command ready for Void Linux users, including `musl-devel` library.
 
 ```
 xbps-install -S tcc make patch musl-devel libX11-devel libXft-devel libXinerama-devel
-apk add tcc make patch musl-dev libx11-dev libxft-dev libxinerama-dev
 ```
 
 ## Added Functionality
@@ -26,30 +25,11 @@ apk add tcc make patch musl-dev libx11-dev libxft-dev libxinerama-dev
 
 * [fibonacci](https://dwm.suckless.org/patches/fibonacci/)
 
-```
-+-----------+-----------+  +-----------+-----------+
-|           |           |  |           |           |
-|           |     2     |  |           |     2     |
-|           |           |  |           |           |
-|     1     +--+--+-----+  |     1     +-----+-----+
-|           | 5|-.|     |  |           |     |  4  |
-|           +--+--+  3  |  |           |  3  +--+--+
-|           |  4  |     |  |           |     | 5|-.|
-+-----------+-----+-----+  +-----------+-----+-----+
-```
+	> This patch adds two new layouts that arrange all windows in fibonacci tiles: The first window uses half the screen, the second the half of the remainder, etc…
 
 * [horizgrid](https://dwm.suckless.org/patches/horizgrid/)
 
-```
-  horizgrid     (###)
-  +--------+--------+
-  |        |        |
-  |        |        |
-  +-----+--+--+-----+
-  |     |     |     |
-  |     |     |     |
-  +-----+-----+-----+
-```
+	> This patch arranges windows in a grid pattern in which every window is roughly the same size, adjusted such that there are no gaps.
 
 ### Plugins
 
