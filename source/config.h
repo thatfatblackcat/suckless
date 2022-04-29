@@ -45,6 +45,8 @@ static const char *tags[] = {
 	"7", "8", "9",
 };
 
+#include <X11/XF86keysym.h>
+
 #include "../layout/fibonacci.c"
 #include "../layout/horizgrid.c"
 #include "../plugin/movestack.c"
@@ -56,6 +58,8 @@ static const char *tags[] = {
 	{ MODKEY|ControlMask, KEY, toggleview, {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask, KEY, tag, {.ui = 1 << TAG} }, \
 	{ MODKEY, KEY, view, {.ui = 1 << TAG} }, \
+
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const Layout layouts[] = {
 	{ "[]=", tile }, { "[M]", monocle },
@@ -73,6 +77,12 @@ static Key keys[] = {
 	TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2)
 	TAGKEYS(XK_4, 3) TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
 	TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_9, 8)
+
+	{ 0, XF86XK_AudioMicMute, spawn, SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0, XF86XK_AudioMute, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
+
+	{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -1000") },
+	{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +1000") },
 
 	{ MODKEY, XK_j, focusstack, {.i = +1 } },
 	{ MODKEY, XK_k, focusstack, {.i = -1 } },
