@@ -8,7 +8,9 @@ static const unsigned int borderpx = 1;
 static const unsigned int snap = 32;
 
 static const float mfact = 0.55;
+
 static char dmenumon[2] = "0";
+static char lockfile[] = "/tmp/dwm.lock";
 
 static const char dmenu_nb[] = "#222222";
 static const char dmenu_nf[] = "#bbbbbb";
@@ -51,9 +53,9 @@ static const char *tags[] = {
 
 #define COMMAND(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #define TAGKEYS(KEY,TAG) \
-	{ Mod1Mask|ShiftMask, KEY, tag, {.ui = 1 << TAG} }, \
 	{ Mod1Mask|ControlMask, KEY, toggleview, {.ui = 1 << TAG} }, \
 	{ Mod1Mask|ControlMask|ShiftMask, KEY, toggletag, {.ui = 1 << TAG} }, \
+	{ Mod1Mask|ShiftMask, KEY, tag, {.ui = 1 << TAG} }, \
 	{ Mod1Mask, KEY, view, {.ui = 1 << TAG} }, \
 
 static const Layout layouts[] = {
@@ -114,7 +116,7 @@ static Key keys[] = {
 	{ Mod1Mask|ShiftMask, XK_b, spawn, {.v = xdpmscmd } },
 
 	{ Mod1Mask, XK_s, spawn, COMMAND("sxiv -ro tatenaga/ yokonaga/") },
-	{ Mod1Mask|ShiftMask, XK_s, spawn, COMMAND("sudo timeshift-gtk") },
+	{ Mod1Mask|ShiftMask, XK_s, spawn, COMMAND("sleep 1; xset dpms force suspend") },
 
 	{ 0, XF86XK_AudioMicMute, spawn, COMMAND("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	{ 0, XF86XK_AudioMute, spawn, COMMAND("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
